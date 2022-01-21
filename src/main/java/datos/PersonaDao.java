@@ -4,8 +4,6 @@ import static datos.Conexion.*;
 import domain.Persona;
 import java.sql.*;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class PersonaDao {
 
@@ -69,9 +67,9 @@ public class PersonaDao {
             } catch (SQLException ex) {
                 ex.printStackTrace(System.out);
             }
-
         }
-
         return registros;
     }
+    
+    
 }

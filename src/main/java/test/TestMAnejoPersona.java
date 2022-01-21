@@ -19,8 +19,14 @@ public class TestMAnejoPersona {
         PersonaDao personaDao = new PersonaDao();
         List<Persona> personas = personaDao.seleccionar();
 
+        
+        //Insertar un nuevo tipo persona
+        Persona persona1 = new Persona("Carlos","Esperanza","asfas@asda.com","3242123");
+        personaDao.insertar(persona1);
+        
         personas.forEach(persona -> {
             System.out.println(persona);
         });
+        
     }
 }
