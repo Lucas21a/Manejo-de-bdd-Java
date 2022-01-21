@@ -4,10 +4,13 @@ import static datos.Conexion.*;
 import domain.Persona;
 import java.sql.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PersonaDao {
 
     private static final String SQL_SELECT = "SELECT id_persona,nombre,apellido,email,telefono FROM persona";
+    private static final String SQL_INSERT = "INSERT INTO persona(nombre,apellido,email,telefono) VALUES(?,?,?,?)";
 
     public List<Persona> seleccionar() {
         Connection con = null;
@@ -34,13 +37,41 @@ public class PersonaDao {
             ex.printStackTrace(System.out);
         } finally {
             try {
-                Conexion.close(rs);
-                Conexion.close(stmt);
-                Conexion.close(con);
+                close(rs);
+                close(stmt);
+                close(con);
             } catch (SQLException ex) {
                 ex.printStackTrace(System.out);
             }
         }
         return personas;
+    }
+
+    public int insertar(Persona persona) {
+        int registros = 0;
+        Connection con = null;
+        PreparedStatement stmt = null;
+        try {
+            con = getConnection();
+            stmt = con.prepareStatement(SQL_INSERT);
+            stmt.setString(1, persona.getNombre());
+            stmt.setString(2, persona.getApellido());
+            stmt.setString(3, persona.getEmail());
+            stmt.setString(4, persona.getTelefono());
+            registros = stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            try {
+                close(stmt);
+                close(con);
+            } catch (SQLException ex) {
+                ex.printStackTrace(System.out);
+            }
+
+        }
+
+        return registros;
     }
 }
