@@ -17,16 +17,23 @@ public class TestMAnejoPersona {
 
     public static void main(String[] args) {
         PersonaDao personaDao = new PersonaDao();
-        List<Persona> personas = personaDao.seleccionar();
 
-        
         //Insertar un nuevo tipo persona
-        Persona persona1 = new Persona("Carlos","Esperanza","asfas@asda.com","3242123");
-        personaDao.insertar(persona1);
+        //    Persona persona1 = new Persona("Carlos","Esperanza","asfas@asda.com","3242123");
+        //   personaDao.insertar(persona1);
         
+        //Modificar persona
+       // Persona personaMod = new Persona(1, "Juan Manuel", "Pereyra", "gugu@adssg", "131441414212");
+       // personaDao.actualizar(personaMod);
+       
+       
+       //Eliminar registro
+       Persona eliminar = new Persona(4);
+       personaDao.elminar(eliminar);
+        List<Persona> personas = personaDao.seleccionar();
         personas.forEach(persona -> {
             System.out.println(persona);
         });
-        
+
     }
 }
